@@ -1,0 +1,85 @@
+Please use TADDM FP7 documentation as base documetation and not FP8 documentation
+
+Following sensors sub-categories are not supported and must be removed:
+----------------------------------------------------------------------
+
+Category 1: Application Sensor
+------------------------------
+
+- Citrix Server Sensor
+- Docker Host Sensor
+- Docker Swarm Cluster Sensor
+- IBM High-Availability Cluster Multi-Processing (HACMP) sensor -----> Troubleshooting the sensor -----> 'HACMP cluster is duplicated'
+- IBM Tivoli Monitoring Scope sensor
+- IBM WebSphere sensor -----> Asynchronous and script-based discovery support
+- IBM WebSphere MQ Server -----> Asynchronous and script-based discovery support
+- JBoss server sensor (We need to copy JARS to run this sensor, path: /<collation>/lib/jboss)
+- JBoss 7 Application Server sensor -----> Configuring the sensor -----> Configuring for asynchronous discovery
+- Microsoft Exchange sensor (The Microsoft Exchange sensor supports only script-based and asynchronous discovery. It does not support regular discoveries)
+- Microsoft IIS Web server sensor -----> Configuring the sensor -----> Configuring for a non-admin IIS discovery (In this page, we need to copy the files to the target system)
+- Oracle Application Server sensor (We need to copy JARS to run this sensor)
+- SAP CCMS server sensor (We need to copy files to run this sensor)
+- WebLogic sensor (We need to copy JARS to run this sensor)
+- WebLogic SSH sensor -----> Asynchronous and script-based discovery support
+
+Category 2: Cloud Sensor -----> Not Supported
+------------------------
+
+Category 3: Database Sensors
+----------------------------
+- IBM DB2 sensor -----> Asynchronous and script-based discovery support
+- Microsoft SQL Server sensor -----> 'Script-based discovery requirements'
+- Microsoft SQL Server sensor -----> Troubleshooting the sensor -----> 'The script-based discovery of the Microsoft SQL Server sensor fails'
+- Oracle sensor -----> (We need to copy JARS to run this sensor)
+
+Category 4: Generic Sensors
+---------------------------
+- Asynchronous discovery sensor
+- Asynchronous discovery ping sensor
+- Custom application server sensor
+- Custom MIB2 computer system sensor
+- Custom template sensor
+- Generic server sensor -----> Asynchronous and script-based discovery support
+- IBM Tivoli Utilization sensor (We need to copy JARS to run this sensor)
+
+Category 5: Network Sensors
+---------------------------
+Overview of SNMP sensors -----> Maintaining SNMP computer system templates and configuration files (because Computer System is not implemented in Swagger till now)
+
+Category 6: Operating System Sensors
+------------------------------------
+DataPower sensor -----> 'For each new discovered category, a separate tab is created in Data Management Portal' (this is not possible)
+FreeBSD computer system sensor -----> Asynchronous and script-based discovery support
+HP NonStop computer system sensor  -----> 'This sensor is supported only in the Asynchronous discovery mode (ASD)'
+IBM AIX computer system sensor -----> Asynchronous and script-based discovery support
+Linux computer system sensor -----> Asynchronous and script-based discovery support
+Solaris computer system sensor -----> Asynchronous and script-based discovery support
+Windows computer system sensor -----> Asynchronous and script-based discovery support
+							   -----> Configuring for a non-admin Windows discovery
+
+Category 7: Storage Sensors
+---------------------------
+EMC Storage Scope sensor -----> 'Prerequisites'
+Host storage sensor -----> 'Copying the collection engine file to a location accessible to the target host system'
+IBM Tivoli Storage Productivity Center sensor -----> 'Prerequisites'
+
+
+
+Following additional changes are required:
+-----------------------------------------
+1. Remove pages titled "Asynchronous and script-based discovery support" at all places they appear
+2. Remove all references to TADDM, they  must be replaced by app-disco/ASM
+3. Reference to TADDM UI elements must be removed For example on docker host sensor page, following lines must be removed
+		"In the Discovery Management Console and Data Management Portal, a Docker Host is represented by a blue-colored Docker whale design icon, and, Docker container using square shaped four-stacked shipping containers."
+4. Replace any instructions that requires uses of TADDM Discovery management console with the instructions to follow on ASM UI. 
+		For example, check example in "Docker sensor" page.
+5. On a sensor page, whenver sensor name is displayed under the heading "Sensor name that is used in the GUI and logs", keep this heading intact if sensor names are displayed on ASM UI (there is no app-disco UI), else remove GUI from this heading.
+6. Replace the reference to TADDM Data Management Portal with corresponding sections in ASM UI, 
+		For example, In section Application Sensors > IBM High-Availability Cluster Multi-Processing Sensors > Troubleshooting the sensors, solution to "HACMP Cluster is duplicated" problem is described as
+					"To resolve a situation where a HACMP cluster has been duplicated, using the Data Management Portal, delete the copy of the cluster that has the old cluster name."
+					This must be replaced with corresponding action in ASM UI.
+7. Replace all references to configuration using TADDM UI with configuration using ASM UI (For example, Application Sensors > IBM Lotus Domino Server Sensor > Configuring the access list)
+
+Note: Apart from these generic changes, we will continue to look for specific changes required in sensor descriptions and will raise change request if needed.
+
+
